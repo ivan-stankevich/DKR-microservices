@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-admin
+  labels:
+    app: spring-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-admin
+  template:
+    metadata:
+      labels:
+        app: spring-admin
+    spec:
+      containers:
+        - name: spring-admin
+          image: ivanstankevich1997/spring-admin:1.1.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: spring.boot.admin.context-path
+              value: /spring-admin
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-admin
+spec:
+  selector:
+    app: spring-admin
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer

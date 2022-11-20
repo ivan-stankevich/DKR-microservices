@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: movie-catalog-service
+  boot:
+    admin:
+      client:
+        instance:
+          service-host-type: ip
+        url: ${SPRING_ADMIN:http://localhost:8080/}
+
+info:
+  url: ${INFO_URL:http://localhost:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

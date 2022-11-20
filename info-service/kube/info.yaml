@@ -1,0 +1,37 @@
+# ... Deployment YAML definition
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: info
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: info
+  template:
+    metadata:
+      labels:
+        app: info
+    spec:
+      containers:
+        - name: app
+          image: ivanstankevich1997/info:1.2.0
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_ADMIN
+              value: http://spring-admin:8080
+---
+# ... Service YAML definition
+apiVersion: v1
+kind: Service
+metadata:
+  name: info
+spec:
+  selector:
+    app: info
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: ClusterIP

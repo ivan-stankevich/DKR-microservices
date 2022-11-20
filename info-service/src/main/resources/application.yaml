@@ -1,0 +1,18 @@
+api:
+  key: 4fe44c6161faa4295bf892dd469fdcf7
+
+spring:
+  application:
+    name: movie-info-service
+  boot:
+    admin:
+      client:
+        instance:
+          service-host-type: ip
+        url: ${SPRING_ADMIN:http://localhost:8080/}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
